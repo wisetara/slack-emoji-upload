@@ -12,8 +12,8 @@ session = Capybara::Session.new(:webkit)
 
 emoji_hash = JSON.parse(File.read("emoji_list.txt"))
 puts "Importing #{emoji_hash.count} emoji"
-Dir.mkdir("emoji_images") unless Dir.exist?("emoji_images")
-Dir.chdir("emoji_images") do
+Dir.mkdir("emoji_images2") unless Dir.exist?("emoji_images2")
+Dir.chdir("emoji_images2") do
   emoji_hash.each do |text, url|
     next if url.start_with?("alias:")
     image_extension = File.extname(URI.parse(url).path)
@@ -49,7 +49,7 @@ emoji_hash.each do |text, url|
     session.choose('modedata')
     image_extension = File.extname(URI.parse(url).path)
     filename = "#{text}#{image_extension}"
-    session.attach_file("emojiimg", File.absolute_path("./emoji_images/#{filename}"))
+    session.attach_file("emojiimg", File.absolute_path("./emoji_images2/#{filename}"))
   end
 
   session.click_link_or_button 'Save New Emoji'
