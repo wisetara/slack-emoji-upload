@@ -27,9 +27,11 @@ end
 slack_domain = ENV["SLACK_DOMAIN"]
 puts "Logging into Slack for #{slack_domain}"
 
-session.visit("http://#{slack_domain}.slack.com/customize/emoji")
+session.visit("http://#{slack_domain}.slack.com/admin/emoji")
 session.click_on("index_google_sign_in_with_google")
-# session.click_on("tscherner@hireology.com")
+session.fill_in("identifierId", with: ENV"[SLACK_EMAIL_PREFIX]")
+session.click_on("RveJvd snByac")
+session.fill_in("password", with: ENV["SLACK_PASSWORD"])
 # session.fill_in("email", with: ENV["SLACK_EMAIL"])
 # session.fill_in("password", with: ENV["SLACK_PASSWORD"])
 # session.click_button("Sign in")
@@ -37,6 +39,8 @@ session.click_on("index_google_sign_in_with_google")
 puts "Logged in!"
 
 emoji_hash.each do |text, url|
+  session.click_on("customize_emoji_wrapper__custom_button")
+
   session.fill_in("name", with: text)
   if url.start_with?("alias:")
     target = url.split(":")[1]
