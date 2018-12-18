@@ -29,7 +29,7 @@ puts "Logging into Slack for #{slack_domain}"
 
 session.visit("http://#{slack_domain}.slack.com/customize/emoji")
 session.click_on("index_google_sign_in_with_google")
-session.click("tscherner@hireology.com")
+session.click_on("tscherner@hireology.com")
 session.fill_in("email", with: ENV["SLACK_EMAIL"])
 session.fill_in("password", with: ENV["SLACK_PASSWORD"])
 session.click_button("Sign in")
